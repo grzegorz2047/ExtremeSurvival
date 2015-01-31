@@ -5,10 +5,12 @@
  */
 package pl.grzegorz2047.extremesurvival;
 
+import org.bukkit.plugin.java.JavaPlugin;
+
 /**
  *
  * @author Grzegorz
  */
-public class Main {
+public class Main extends JavaPlugin {
     
 }
