@@ -26,18 +26,25 @@ import pl.grzegorz2047.extremesurvival.Main;
 public class PurgeRunnable extends BukkitRunnable {
 
     int size = Main.getES().getBorder().getSize();
-                int minSize = Main.getES().getBorder().getDecreasedSize();
-                @Override
-                public void run() {
-                    if(size>minSize){
-                        size--;
-                        System.out.println("Size to "+size);
-                        Main.getES().getBorder().getLoc().getWorld().getWorldBorder().setSize(size);
-                    }else{
-                        Main.getES().getBorder().setRunning(false);
-                        Bukkit.getScheduler().cancelTask(this.getTaskId());
-                        Main.getES().getBorder().resetBorder();
-                    }
-                }
+    int minSize = Main.getES().getBorder().getDecreasedSize();
+    @Override
+    public void run() {
+        if(size>minSize){
+            if(Bukkit.getOnlinePlayers().size()==0){
+                Main.getES().getBorder().setRunning(false);
+                Bukkit.getScheduler().cancelTask(this.getTaskId());
+                Main.getES().getBorder().resetBorder();
+                Main.getES().getBorder().setLastPurgeTime(size);
+            }
+            size--;
+            System.out.println("Size to "+size);
+            Main.getES().getBorder().getLoc().getWorld().getWorldBorder().setSize(size);
+        }else{
+            Main.getES().getBorder().setRunning(false);
+            Bukkit.getScheduler().cancelTask(this.getTaskId());
+            Main.getES().getBorder().resetBorder();
+            Main.getES().getBorder().setLastPurgeTime(size);
+        }
+    }
     
 }

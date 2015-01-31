@@ -33,7 +33,7 @@ public class PingListListener implements Listener {
             e.setMotd(ChatColor.BOLD+" "+ChatColor.RED+"Na serwerze trwa czystka! Trzeba czekac!");
         }else{
             int sec = (int) (Main.getES().getBorder().whenPurge()/1000);
-            e.setMotd(ChatColor.BOLD+" "+ChatColor.GREEN+"Czystka za "+Main.formatIntoHHMMSS(sec));
+            e.setMotd(ChatColor.BOLD+" "+ChatColor.GREEN+"Czystka za "+Main.formatIntoHHMMSS(sec)+" sekund!");
         }
         
     }

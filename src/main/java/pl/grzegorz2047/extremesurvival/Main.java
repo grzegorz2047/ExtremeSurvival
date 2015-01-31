@@ -14,8 +14,10 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.grzegorz2047.extremesurvival.listeners.PingListListener;
 import pl.grzegorz2047.extremesurvival.listeners.PlayerDeathListener;
+import pl.grzegorz2047.extremesurvival.listeners.PlayerJoinListener;
 import pl.grzegorz2047.extremesurvival.listeners.PlayerLoginListener;
 import pl.grzegorz2047.extremesurvival.listeners.PlayerQuitListener;
+import pl.grzegorz2047.extremesurvival.runnables.InfoScoreboardRunnable;
 
 /**
  *
@@ -26,7 +28,7 @@ public class Main extends JavaPlugin {
     private BorderManagement border;
     
     public static Main getES(){
-        return (Main) Bukkit.getPluginManager().getPlugin("ExtremeSurvival");
+        return (Main) Main.getProvidingPlugin(Main.class);
     }
     
     @Override
@@ -45,12 +47,13 @@ public class Main extends JavaPlugin {
                 Main.getES().getBorder().startBorder();
             }
         }, triggerTime*60*20l, 20l);
-        
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new InfoScoreboardRunnable(), 20l, 20l);
         PluginManager pm = Bukkit.getServer().getPluginManager();
         pm.registerEvents(new PingListListener(), this);
         pm.registerEvents(new PlayerLoginListener(), this);
         pm.registerEvents(new PlayerQuitListener(), this);
         pm.registerEvents(new PlayerDeathListener(), this);
+        pm.registerEvents(new PlayerJoinListener(), this);
     }
 
     @Override
@@ -78,6 +81,7 @@ public class Main extends JavaPlugin {
         return loc;
     }
     public static String formatIntoHHMMSS(int secsIn){
+        
         int remainder = secsIn % 3600,
         minutes = remainder / 60,
         seconds = remainder % 60;

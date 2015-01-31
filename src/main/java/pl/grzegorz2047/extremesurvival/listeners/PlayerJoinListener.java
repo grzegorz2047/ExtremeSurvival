@@ -17,6 +17,7 @@ package pl.grzegorz2047.extremesurvival.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import pl.grzegorz2047.extremesurvival.Main;
 import pl.grzegorz2047.extremesurvival.ScoreboardManagement;
@@ -25,13 +26,11 @@ import pl.grzegorz2047.extremesurvival.ScoreboardManagement;
  *
  * @author Grzegorz
  */
-public class PlayerLoginListener implements Listener{
+public class PlayerJoinListener implements Listener{
     
     @EventHandler
-    void onLogin(PlayerLoginEvent e){
-        if(Main.getES().getBorder().isRunning()){
-            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "Na serwerze aktualnie trwa czystka! Wroc za chwile!");
-        }
+    void onLogin(PlayerJoinEvent e){
+        ScoreboardManagement.createScoreboard(e.getPlayer());
     }
     
 }

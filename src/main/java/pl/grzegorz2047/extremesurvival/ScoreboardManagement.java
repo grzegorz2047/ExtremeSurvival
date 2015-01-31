@@ -20,6 +20,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 
 /**
@@ -32,9 +33,17 @@ public class ScoreboardManagement {
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective obj = scoreboard.registerNewObjective("Info", "dummy");
         int sec = (int) (Main.getES().getBorder().whenPurge()/1000);
-        obj.setDisplayName("Czystka za "+Main.formatIntoHHMMSS(sec));
+        if(sec < 0){
+                    obj.setDisplayName("Czystka Trwa!");
+        }else{
+                    obj.setDisplayName("Czystka za "+Main.formatIntoHHMMSS(sec));
+        }
+
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-        obj.getScore(ChatColor.BOLD+""+ChatColor.GREEN+"Purge");
+        Score s = obj.getScore(ChatColor.BOLD+""+ChatColor.GREEN+"Granica");
+        s.setScore(-1);
+        Score size = obj.getScore(ChatColor.BOLD+""+ChatColor.GREEN+Main.getES().getBorder().getSize()/2+"");
+        size.setScore(-2);
         p.setScoreboard(scoreboard);
     }
     

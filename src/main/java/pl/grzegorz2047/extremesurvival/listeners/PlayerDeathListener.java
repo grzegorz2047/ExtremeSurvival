@@ -18,6 +18,7 @@ package pl.grzegorz2047.extremesurvival.listeners;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 
 /**
  *
@@ -27,6 +28,8 @@ public class PlayerDeathListener implements Listener {
     
     @EventHandler
     void onDeath(PlayerDeathEvent e){
+        e.getEntity().getInventory().clear();
+        e.getEntity().getInventory().setArmorContents(new ItemStack[4]);
         e.getEntity().kickPlayer("Zostales oczyszczony!");
     }
     

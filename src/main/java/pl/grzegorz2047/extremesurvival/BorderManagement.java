@@ -47,7 +47,7 @@ public class BorderManagement {
     }
     
     public Long whenPurge(){
-        return this.lastPurgeTime+1000*this.triggerTime;
+        return (this.lastPurgeTime+1000*this.triggerTime*60)-System.currentTimeMillis();
     }
     
     public boolean isRunning(){
