@@ -19,6 +19,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import pl.grzegorz2047.extremesurvival.Main;
+import pl.grzegorz2047.extremesurvival.ScoreboardManagement;
 
 /**
  *
@@ -28,6 +29,7 @@ public class PlayerLoginListener implements Listener{
     
     @EventHandler
     void onLogin(PlayerLoginEvent e){
+        ScoreboardManagement.createScoreboard(e.getPlayer());
         if(Main.getES().getBorder().isRunning()){
             e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "Na serwerze aktualnie trwa czystka! Wroc za chwile!");
         }

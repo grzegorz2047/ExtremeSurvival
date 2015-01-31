@@ -6,12 +6,14 @@
 package pl.grzegorz2047.extremesurvival;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.grzegorz2047.extremesurvival.listeners.PingListListener;
+import pl.grzegorz2047.extremesurvival.listeners.PlayerDeathListener;
 import pl.grzegorz2047.extremesurvival.listeners.PlayerLoginListener;
 import pl.grzegorz2047.extremesurvival.listeners.PlayerQuitListener;
 
@@ -34,7 +36,7 @@ public class Main extends JavaPlugin {
         int decreaseSize = this.getConfig().getInt("decreasedSize");
         int triggerTime = this.getConfig().getInt("triggerMinuteTime");
         Location loc = Main.parseLocationString(this.getConfig().getString("loc"));
-        this.border = new BorderManagement(size, decreaseSize, loc);
+        this.border = new BorderManagement(size, decreaseSize, loc, triggerTime);
         System.out.print(this.getName()+" zostal wlaczony");
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
 
@@ -48,6 +50,7 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new PingListListener(), this);
         pm.registerEvents(new PlayerLoginListener(), this);
         pm.registerEvents(new PlayerQuitListener(), this);
+        pm.registerEvents(new PlayerDeathListener(), this);
     }
 
     @Override
@@ -73,5 +76,13 @@ public class Main extends JavaPlugin {
         //Mozna dac world
         Location loc = new Location(Bukkit.getWorld(world), x,y,z);
         return loc;
+    }
+    public static String formatIntoHHMMSS(int secsIn){
+        int remainder = secsIn % 3600,
+        minutes = remainder / 60,
+        seconds = remainder % 60;
+
+        return  ChatColor.GREEN+( (minutes < 10 ? "0" : "") + minutes
+        + ":" + (seconds< 10 ? "0" : "") + seconds );
     }
 }

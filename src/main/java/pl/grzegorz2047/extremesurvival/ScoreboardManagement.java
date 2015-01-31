@@ -15,12 +15,27 @@
  */
 package pl.grzegorz2047.extremesurvival;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
+
 /**
  *
  * @author Grzegorz
  */
 public class ScoreboardManagement {
     
-    
+    public static void createScoreboard(Player p ){
+        Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+        Objective obj = scoreboard.registerNewObjective("Info", "dummy");
+        int sec = (int) (Main.getES().getBorder().whenPurge()/1000);
+        obj.setDisplayName("Czystka za "+Main.formatIntoHHMMSS(sec));
+        obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+        obj.getScore(ChatColor.BOLD+""+ChatColor.GREEN+"Purge");
+        p.setScoreboard(scoreboard);
+    }
     
 }

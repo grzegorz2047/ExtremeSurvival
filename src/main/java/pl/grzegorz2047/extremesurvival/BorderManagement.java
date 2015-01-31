@@ -22,17 +22,20 @@ public class BorderManagement {
     private int size;
     private int decreasedSize;
     private Location loc;
-    
-    public BorderManagement(int size, int decreaseSize, Location loc){
+    private long lastPurgeTime = System.currentTimeMillis();
+    private int triggerTime ;
+    public BorderManagement(int size, int decreaseSize, Location loc, int triggerTime){
         if(size<1 && decreaseSize>size){
             System.out.println("Wielkosc granicy musi byc >1");
             this.size = 1000;
             this.loc = loc;
             this.decreasedSize = 100;
+            this.triggerTime = 60;
         }else{
             this.size = size;
             this.loc = loc;
             this.decreasedSize = decreaseSize;
+            this.triggerTime = triggerTime;
         }
 
         WorldBorder wb = loc.getWorld().getWorldBorder();
@@ -41,6 +44,10 @@ public class BorderManagement {
         wb.setWarningTime(5);
         wb.setSize(size);
         wb.setWarningDistance(30);
+    }
+    
+    public Long whenPurge(){
+        return this.lastPurgeTime+1000*this.triggerTime;
     }
     
     public boolean isRunning(){
@@ -82,5 +89,13 @@ public class BorderManagement {
 
     public Location getLoc() {
         return loc;
+    }
+
+    public long getLastPurgeTime() {
+        return lastPurgeTime;
+    }
+
+    public void setLastPurgeTime(long lastPurgeTime) {
+        this.lastPurgeTime = lastPurgeTime;
     }
 }
