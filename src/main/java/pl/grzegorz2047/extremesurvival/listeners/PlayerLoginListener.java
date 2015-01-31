@@ -15,26 +15,22 @@
  */
 package pl.grzegorz2047.extremesurvival.listeners;
 
-import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.server.ServerListPingEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import pl.grzegorz2047.extremesurvival.Main;
 
 /**
  *
  * @author Grzegorz
  */
-public class PingListListener implements Listener {
+public class PlayerLoginListener implements Listener{
     
     @EventHandler
-    void onPing(ServerListPingEvent e){
+    void onLogin(PlayerLoginEvent e){
         if(Main.getES().getBorder().isRunning()){
-            e.setMotd(ChatColor.BOLD+" "+ChatColor.RED+"Na serwerze trwa czystka! Trzeba czekac!");
-        }else{
-            e.setMotd(ChatColor.BOLD+" "+ChatColor.GREEN+"Zapraszamy na serwer Purge!");
+            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "Na serwerze aktualnie trwa pustka! Wroc za chwile!");
         }
-        
     }
     
 }

@@ -9,7 +9,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.grzegorz2047.extremesurvival.listeners.PingListListener;
+import pl.grzegorz2047.extremesurvival.listeners.PlayerLoginListener;
+import pl.grzegorz2047.extremesurvival.listeners.PlayerQuitListener;
 
 /**
  *
@@ -28,6 +32,7 @@ public class Main extends JavaPlugin {
         this.saveDefaultConfig();
         int size = this.getConfig().getInt("size");
         int decreaseSize = this.getConfig().getInt("decreasedSize");
+        int triggerTime = this.getConfig().getInt("triggerMinuteTime");
         Location loc = Main.parseLocationString(this.getConfig().getString("loc"));
         this.border = new BorderManagement(size, decreaseSize, loc);
         System.out.print(this.getName()+" zostal wlaczony");
@@ -37,11 +42,17 @@ public class Main extends JavaPlugin {
             public void run() {
                 Main.getES().getBorder().startBorder();
             }
-        }, 3*60*60*20l, 20l);
+        }, triggerTime*60*20l, 20l);
+        
+        PluginManager pm = Bukkit.getServer().getPluginManager();
+        pm.registerEvents(new PingListListener(), this);
+        pm.registerEvents(new PlayerLoginListener(), this);
+        pm.registerEvents(new PlayerQuitListener(), this);
     }
 
     @Override
     public void onDisable() {
+        Bukkit.getScheduler().cancelTasks(this);
         System.out.print(this.getName()+" zostal wylaczony");
     }
 
