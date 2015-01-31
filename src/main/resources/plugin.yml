@@ -1,0 +1,6 @@
+name: ExtremeSurvival
+version: 0.1
+main: pl.grzegorz2047.extremesurvival.Main
+commands:
+    es:
+        description: komendy Extreme
