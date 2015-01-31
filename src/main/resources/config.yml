@@ -1,3 +1,4 @@
 loc: world:0:0:0
 size: 150
 decreasedSize: 15
+triggerMinuteTime: 1800

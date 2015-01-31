@@ -19,21 +19,29 @@ public class BorderManagement {
     private boolean running;
     private int size;
     private int decreasedSize;
+    private Location loc;
     
     public BorderManagement(int size, int decreaseSize, Location loc){
-        if(size>=1 && decreaseSize<size){
-            
-            System.out.println("Wielkosc granicy >1");
-            WorldBorder wb = loc.getWorld().getWorldBorder();
-            wb.setCenter(loc);
-            wb.setDamageAmount(2);
-            wb.setWarningTime(5);
-            wb.setSize(size);
-            wb.setWarningDistance(30);
+        if(size<1 && decreaseSize>size){
+            System.out.println("Wielkosc granicy musi byc >1");
+            this.size = 1000;
+            this.loc = loc;
+            this.decreasedSize =100;
+        }else{
+            this.size = size;
+            this.loc = loc;
+            this.decreasedSize = decreaseSize;
         }
+
+        WorldBorder wb = loc.getWorld().getWorldBorder();
+        wb.setCenter(loc);
+        wb.setDamageAmount(2);
+        wb.setWarningTime(5);
+        wb.setSize(size);
+        wb.setWarningDistance(30);
     }
     
-    private boolean isRunning(){
+    public boolean isRunning(){
         return this.running;
     }
     
@@ -70,5 +78,13 @@ public class BorderManagement {
 
     private void setRunning(boolean running) {
         this.running = running;
+    }
+    public void resetBorder(){
+        WorldBorder wb = this.loc.getWorld().getWorldBorder();
+        wb.setCenter(this.loc);
+        wb.setDamageAmount(2);
+        wb.setWarningTime(5);
+        wb.setSize(this.size);
+        wb.setWarningDistance(30);
     }
 }

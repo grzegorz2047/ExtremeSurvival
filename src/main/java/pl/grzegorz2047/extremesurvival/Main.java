@@ -31,6 +31,13 @@ public class Main extends JavaPlugin {
         Location loc = Main.parseLocationString(this.getConfig().getString("loc"));
         this.border = new BorderManagement(size, decreaseSize, loc);
         System.out.print(this.getName()+" zostal wlaczony");
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
+
+            @Override
+            public void run() {
+                Main.getES().getBorder().startBorder();
+            }
+        }, 3*60*60*20l, 20l);
     }
 
     @Override
