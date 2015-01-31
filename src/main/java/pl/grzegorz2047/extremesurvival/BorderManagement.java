@@ -10,6 +10,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.WorldBorder;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
+import pl.grzegorz2047.extremesurvival.runnables.PurgeRunnable;
 
 /**
  *
@@ -26,7 +28,7 @@ public class BorderManagement {
             System.out.println("Wielkosc granicy musi byc >1");
             this.size = 1000;
             this.loc = loc;
-            this.decreasedSize =100;
+            this.decreasedSize = 100;
         }else{
             this.size = size;
             this.loc = loc;
@@ -47,19 +49,9 @@ public class BorderManagement {
     
     public void startBorder(){
         if(!this.running){
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getES(), new BukkitRunnable(){
-                int size = Main.getES().getBorder().getSize();
-                int minSize = Main.getES().getBorder().getDecreasedSize();
-                @Override
-                public void run() {
-                    if(size>minSize){
-                        size--;
-                    }else{
-                        Main.getES().getBorder().setRunning(false);
-                        this.cancel();
-                    }
-                }
-            }, 20l, 20l);
+            System.out.println("Probuje wykonywanie tego");
+            Main.getES().getBorder().setRunning(true);
+            BukkitTask TaskName = new PurgeRunnable().runTaskTimer(Main.getES(), 20, 20);
         }
     }
 
@@ -76,7 +68,7 @@ public class BorderManagement {
         return decreasedSize;
     }
 
-    private void setRunning(boolean running) {
+    public void setRunning(boolean running) {
         this.running = running;
     }
     public void resetBorder(){
@@ -86,5 +78,9 @@ public class BorderManagement {
         wb.setWarningTime(5);
         wb.setSize(this.size);
         wb.setWarningDistance(30);
+    }
+
+    public Location getLoc() {
+        return loc;
     }
 }

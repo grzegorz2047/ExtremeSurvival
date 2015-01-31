@@ -17,20 +17,17 @@ package pl.grzegorz2047.extremesurvival.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerLoginEvent;
-import pl.grzegorz2047.extremesurvival.Main;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 /**
  *
  * @author Grzegorz
  */
-public class PlayerLoginListener implements Listener{
+public class PlayerDeathListener implements Listener {
     
     @EventHandler
-    void onLogin(PlayerLoginEvent e){
-        if(Main.getES().getBorder().isRunning()){
-            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "Na serwerze aktualnie trwa czystka! Wroc za chwile!");
-        }
+    void onDeath(PlayerDeathEvent e){
+        e.getEntity().kickPlayer("Zostales oczyszczony!");
     }
     
 }
