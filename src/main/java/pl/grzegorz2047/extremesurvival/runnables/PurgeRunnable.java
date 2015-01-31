@@ -30,11 +30,11 @@ public class PurgeRunnable extends BukkitRunnable {
     @Override
     public void run() {
         if(size>minSize){
-            if(Bukkit.getOnlinePlayers().size()==0){
+            if(Bukkit.getOnlinePlayers().isEmpty() && Main.getES().getBorder().isRunning()){
                 Main.getES().getBorder().setRunning(false);
                 Bukkit.getScheduler().cancelTask(this.getTaskId());
                 Main.getES().getBorder().resetBorder();
-                Main.getES().getBorder().setLastPurgeTime(size);
+                Main.getES().getBorder().setLastPurgeTime(System.currentTimeMillis());
             }
             size--;
             System.out.println("Size to "+size);
@@ -43,7 +43,7 @@ public class PurgeRunnable extends BukkitRunnable {
             Main.getES().getBorder().setRunning(false);
             Bukkit.getScheduler().cancelTask(this.getTaskId());
             Main.getES().getBorder().resetBorder();
-            Main.getES().getBorder().setLastPurgeTime(size);
+            Main.getES().getBorder().setLastPurgeTime(System.currentTimeMillis());
         }
     }
     
