@@ -34,9 +34,9 @@ public class ScoreboardManagement {
         Objective obj = scoreboard.registerNewObjective("Info", "dummy");
         int sec = (int) (Main.getES().getBorder().whenPurge()/1000);
         if(sec < 0){
-                    obj.setDisplayName("Czystka Trwa!");
+            obj.setDisplayName("Czystka Trwa!");
         }else{
-                    obj.setDisplayName("Czystka za "+Main.formatIntoHHMMSS(sec));
+            obj.setDisplayName("Czystka za "+Main.formatIntoHHMMSS(sec));
         }
 
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);

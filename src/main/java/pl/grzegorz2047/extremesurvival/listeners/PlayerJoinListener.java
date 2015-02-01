@@ -15,6 +15,7 @@
  */
 package pl.grzegorz2047.extremesurvival.listeners;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -31,6 +32,11 @@ public class PlayerJoinListener implements Listener{
     @EventHandler
     void onLogin(PlayerJoinEvent e){
         ScoreboardManagement.createScoreboard(e.getPlayer());
+        Player p = e.getPlayer();
+        p.sendMessage("Witaj na serwerze Purge!");
+        p.sendMessage("Czystka oznacza to, ze granica swiata zaczyna sie kurczyc w kierunku");
+        p.sendMessage("Koordynat: x: 0 z: 0");
+        p.sendMessage("Zatrzymuje sie na Wspolrzednych x i z: "+Main.getES().getBorder().getDecreasedSize()/2);
     }
     
 }

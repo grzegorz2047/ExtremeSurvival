@@ -38,7 +38,7 @@ public class PurgeRunnable extends BukkitRunnable {
                 
             }
             size--;
-            Main.getES().getBorder().setDecreasedSize(size);
+            Main.getES().getBorder().setDecreasingSize(size);
             System.out.println("Size to "+size);
             Main.getES().getBorder().getLoc().getWorld().getWorldBorder().setSize(size);
         }else{

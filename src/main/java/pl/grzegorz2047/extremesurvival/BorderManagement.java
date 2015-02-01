@@ -19,6 +19,7 @@ import pl.grzegorz2047.extremesurvival.runnables.PurgeRunnable;
  */
 public class BorderManagement {
     private boolean running;
+    private int decreasingSize;//Size which decreasing when purge mode is on
     private int size;
     private int decreasedSize;
     private Location loc;
@@ -74,7 +75,9 @@ public class BorderManagement {
     public int getDecreasedSize() {
         return decreasedSize;
     }
-
+    public int getDecreasingSize() {
+        return decreasingSize;
+    }
     public void setRunning(boolean running) {
         this.running = running;
     }
@@ -99,7 +102,7 @@ public class BorderManagement {
         this.lastPurgeTime = lastPurgeTime;
     }
 
-    public void setDecreasedSize(int size) {
-     this.decreasedSize = size;
+    public void setDecreasingSize(int size) {
+     this.decreasingSize = size;
     }
 }
