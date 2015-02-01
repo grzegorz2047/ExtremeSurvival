@@ -38,7 +38,7 @@ public class InfoScoreboardRunnable extends BukkitRunnable {
                     if(!Main.getES().getBorder().isRunning()){
                         sc.getObjective(DisplaySlot.SIDEBAR).setDisplayName("Czystka za "+Main.formatIntoHHMMSS(sec));
                     }else{
-                        sc.getObjective(DisplaySlot.SIDEBAR).setDisplayName("Czystka Trwa!");
+                        sc.getObjective(DisplaySlot.SIDEBAR).setDisplayName("Czystka Trwa! Granica wynosi "+Main.getES().getBorder().getDecreasedSize());
                     }
                     
                 }

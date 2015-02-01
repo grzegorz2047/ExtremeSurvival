@@ -23,7 +23,7 @@ public class BorderManagement {
     private int decreasedSize;
     private Location loc;
     private long lastPurgeTime = System.currentTimeMillis();
-    private int triggerTime ;
+    private int triggerTime;
     public BorderManagement(int size, int decreaseSize, Location loc, int triggerTime){
         if(size<1 && decreaseSize>size){
             System.out.println("Wielkosc granicy musi byc >1");
@@ -97,5 +97,9 @@ public class BorderManagement {
 
     public void setLastPurgeTime(long lastPurgeTime) {
         this.lastPurgeTime = lastPurgeTime;
+    }
+
+    public void setDecreasedSize(int size) {
+     this.decreasedSize = size;
     }
 }

@@ -40,7 +40,7 @@ public class ScoreboardManagement {
         }
 
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-        Score s = obj.getScore(ChatColor.BOLD+""+ChatColor.GREEN+"Granica");
+        Score s = obj.getScore(ChatColor.GREEN+"Serwer Purge");
         s.setScore(-1);
         Score size = obj.getScore(ChatColor.BOLD+""+ChatColor.GREEN+Main.getES().getBorder().getSize()/2+"");
         size.setScore(-2);

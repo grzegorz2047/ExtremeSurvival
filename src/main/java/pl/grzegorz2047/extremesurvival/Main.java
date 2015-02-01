@@ -46,7 +46,7 @@ public class Main extends JavaPlugin {
             public void run() {
                 Main.getES().getBorder().startBorder();
             }
-        }, triggerTime*60*20l, 20l);
+        }, 20l, triggerTime*60*20l);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new InfoScoreboardRunnable(), 20l, 20l);
         PluginManager pm = Bukkit.getServer().getPluginManager();
         pm.registerEvents(new PingListListener(), this);
